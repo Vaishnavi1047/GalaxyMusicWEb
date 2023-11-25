@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="/static/style.css">
+        <title>Galaxy</title>
+    </head>
+    <body>
+        <div class="container" >
+            <div class="navbar">
+                <ul>
+                    
+                    <li><a href="/home">Home</a></li>
+                    <li><a href="/playlist">Playlist</a></li>
+                    <li><a href="/aboutus">About Us</a></li>
+                    <li>
+                        <form action="/search" method="post">
+                            <input placeholder="cosmic engine" autcomplete="off" id="songs" name="songs" type="text">
+                            <button id="b1" type="submit">Search</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <main>
+                {% block main %}{% endblock %}
+            </main>
+        </div>
+    </body>
+    <script src="{{url_for('static', filename='script.js')}}"></script>
+</html>

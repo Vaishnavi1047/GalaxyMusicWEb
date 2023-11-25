@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GalaxyMusic - Song of the Week</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Poppins');
+        body {
+            background: url('/static/images/bg.png') center/cover;
+            color: #fff;
+            font-family:'Poppins';
+            text-align: center;
+        }
+
+        #song-container {
+            max-width: 520px;
+            margin: 30px auto;
+            /* background: url('/static/images/hdbg.jpg') center/cover; */
+            background-color: #303030;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            opacity: 0; /* Initial opacity for fade-in effect */
+            transition: opacity 1s ease-in-out;
+        }
+
+        #song-container.show {
+            opacity: 1;
+        }
+
+        #song-image {
+            max-width: 90%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        #song-image:hover {
+            transform: scale(1.1);
+        }
+
+        #controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        button {
+            background-color: #444;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        .bottom{
+            color:white;
+            width:90%;
+            height:30%;
+            border:0.1px solid white;
+            /* margin:auto; */
+        }
+        .bottom{
+            margin-top:10px;
+            width:100%;
+            height:9%;
+            /* height:11%; */
+            /* border:0.2px solid #fff; */
+            background:#1e1e1e;
+            box-shadow: 0px 3px 8px #090f1f;
+          
+          }
+    </style>
+</head>
+<body>
+
+    <div id="song-container">
+        <h2>Song of the Week</h2>
+        <img id="song-image" src="/static/images/2.jpg" alt="Song of the Week">
+        
+        <div id="controls">
+            <button id="play-button" onclick="play()">Play</button>
+            <!-- <button id="volume-up-button">Volume Up</button>
+            <button id="volume-down-button">Volume Down</button> -->
+            <pre> Set Volume </pre>
+            <input type="range" id ="volume" max="1" min="0" step="0.01" value="0.5" oninput="setVolume()">
+
+        </div>
+    </div>
+    <audio id="audio">
+        <source src="/static/audio/2.mp3";>
+    </audio>
+
+    <div class="bottom">
+        <footer>
+            <h3>Back to Playlists</h3>
+            <a href="/playlist" style="text-decoration: none; color:rgb(164, 163, 163);"><p>click to go back</p><a> 
+        </footer>
+    </div>
+    <script>
+        // Add your JavaScript code here for handling play, volume, and track settings
+        // For example:
+       /* var isPlaying=false;
+        document.getElementById('play-button').addEventListener('click',()=> {
+            if(!isplaying)
+            {
+               audio.play();
+               topPlay.textContent="Pause";
+            }
+            else
+            {
+                audio.pause();
+            }
+            isPlaying=!isPlaying;
+            console.log('Playing song...');
+        });*/
+        var topPlay=document.getElementById("play-button");
+        var isPlaying=false;
+        function play()
+        {
+            if(!isPlaying)
+            {
+                audio.play();
+                topPlay.textContent="Pause";
+            }
+            else
+            {
+                audio.pause();
+                topPlay.textContent="Play";
+            }
+            isPlaying=!isPlaying;
+        }
+        function setVolume()
+        {
+            var volumeControl = document.getElementById('volume');
+             audio.volume = volumeControl.value;
+        }
+
+        // document.getElementById('volume-up-button').addEventListener('click', function() {
+        //     audio.volume+=0.1;
+        //     console.log('Increasing volume...');
+        // });
+
+        // document.getElementById('volume-down-button').addEventListener('click', function() {
+        //     // Add volume down functionality
+        //     console.log('Decreasing volume...');
+        // });
+
+        // Add fade-in effect when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('song-container').classList.add('show');
+        });
+    </script>
+
+</body>
+</html>

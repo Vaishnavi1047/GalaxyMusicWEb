@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<audio id = "audio" >
+  <source src="/static/audio/1.mp3">
+  </audio>
+<section id="playlist"></section>
+<div id="player">
+    <header>
+          <div class="menu">
+            <h1 style="font-size:x-large; text-align: center;">Playlist</h1>
+            <!-- <div class="playlist1">
+              <h4 class="active"><span></span><i class="bi bi-music-note-beamed"></i>  Playlist</h4>
+              <h4><span></span><i class="bi bi-music-note-beamed"></i>Last Listening</h4>
+              <h4><span></span><i class="bi bi-music-note-beamed"></i>Recommended</h4>
+
+            </div> -->
+            <!-- <h1 style="text-align: center;">Top Songs</h1> -->
+            <div class="menu_song">
+              {% for i in data %}
+                <li class="songItem" onclick="playTrack('{{ i.audloc }}')">
+                  <span style="text-align: center; font-size:medium;">0{{ i.id }}</span>
+                  <img  src="{{ i.imgloc }}" alt="">
+                  <h5>{{ i.name }}<br> 
+                    <div class="subtitle">{{ i.artist }}</div>
+                  </h5>
+                  <i class="bi playListplay bi-play-circle-fill" id="{{ i.id }}"></i>
+                </li>
+              {% endfor %}
+            </div>
+          </div>
+
+        <div class="song">
+          <div id="music-player"> 
+            <div id="audio-controls">
+                <button id="prev" onclick="skipPrevious()">Prev</button>
+                <button id="play-pause" onclick="togglePlayPause()">Play</button>
+                <button id="next" onclick="skipNext()">Next</button>
+                <input type="range" id="time-slider" min="0" value="0" step="0.1" oninput="seekTrack()">
+                <span id="current-time"><pre>0:00   Set Track </pre></span>
+          
+                <!-- <span id="total-time">0:00</span> -->
+            </div>
+            <div id="volume-contro">
+            <span id="total-time">Set volume</span>
+            <input type="range" id="volume" max="1" min="0" step="0.01" value="0.5" oninput="setVolume()">
+                <span id="speed-label">Speed:</span>
+                <select id="speed" onchange="changeSpeed()">
+                    <option value="1">1x</option>
+                    <option value="1.5">1.5x</option>
+                    <option value="2">2x</option>
+                </select>
+
+            </div>
+            <div id="playlist">
+                <ul>
+                    <li onclick="playTrack('/static/audio/1.mp3')"><pre> Top 1 </pre> </li>
+                    <li onclick="playTrack('/static/audio/2.mp3')"><pre> Top 2 </pre></li>
+                    <li onclick="playTrack('/static/audio/3.mp3')"><pre> Top 3 </pre></li>
+                    <!-- <li onclick="playTrack('track2.mp3')">Track 4</li>
+                    <li onclick="playTrack('track2.mp3')">Track 5</li> -->
+                    <form action="/add" method = "Get">
+                      <button action="submit" >Add Track</button>
+                    </form>
+                    <form action="/remove" method="Get">
+                      <button action="submit" >Remove Track</button>
+                    </form>
+
+
+                    <!-- Add more tracks as needed -->
+                </ul>
+            </div>
+            <div id="track-info">
+                <img id="cover-art" src="/static/images/bg5.jpg" alt="Cover Art">
+                <div style="padding:40px">
+                    <h2 id="track-title" style="font-size:20px">Song Title</h2>
+                    <p id="track-artist">Artist</p>
+                    <p id="track-album">Album</p>
+                </div>
+            </div>
+            <div id="repeat-shuffle">
+              <button id="repeat" onclick="toggleRepeat()">Repeat</button>
+              <button id="shuffle" onclick="toggleShuffle()">Shuffle</button>
+            </div>
+          </div>  
+        </div>
+        <div class="bottom">
+          <footer>
+              <h3>Song of the Week</h3>
+              <a href="/sow" style="text-decoration: none; color:rgb(164, 163, 163);"><p>Check out our featured song for this week!</p><a> 
+          </footer>
+          </div>
+      </header>
+    </div>
+    <footer id="f1" class="copyright">
+      <p>&copy;Team enforcers 2023.<br> All rights reserved.</p>
+  </footer>
+{% endblock %}
